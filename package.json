@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "MCP server for Proxenio — enables AI agents to discover, authenticate, and interact with the Proxenio verified intent network.",
   "main": "dist/index.js",
+  "bin": {
+    "proxenio-mcp-server": "dist/index.js"
+  },
   "type": "module",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -11,13 +18,25 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
     "proxenio",
     "ai-agents",
+    "model-context-protocol",
     "trust-network",
-    "professional-matching"
+    "professional-matching",
+    "deal-making",
+    "agent-discovery"
   ],
   "author": "Proxenio Technologies Ltd",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/proxenio/proxenio-mcp-server.git"
+  },
+  "homepage": "https://proxenio.ai",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
     "express": "^4.21.0",

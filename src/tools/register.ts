@@ -1,4 +1,5 @@
 // Proxenio MCP Tool Registration
+import type { ZodTypeAny } from "zod";
 // Registers all tools with the MCP server
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -92,7 +93,7 @@ Examples:
   );
 
   // ─── Tool 2: Set API Key ───
-  server.registerTool(
+  (server.registerTool as any)(
     "proxenio_set_api_key",
     {
       title: "Set Proxenio API Key",
@@ -112,7 +113,7 @@ Examples:
   - Use when: Setting up Proxenio access for the first time
   - Use when: Switching to a different principal's API key
   - Don't use when: Key is already configured and working`,
-      inputSchema: SetApiKeyShape,
+      inputSchema: SetApiKeyShape as unknown as ZodTypeAny,
       annotations: {
         readOnlyHint: false,
         destructiveHint: false,
@@ -120,7 +121,7 @@ Examples:
         openWorldHint: false,
       },
     },
-    async (params) => {
+    async (params: { api_key: string }) => {
       try {
         setApiKey(params.api_key);
         const prefix = params.api_key.substring(0, 12);
@@ -143,7 +144,7 @@ Examples:
   );
 
   // ─── Tool 3: Get Matches ───
-  server.registerTool(
+  (server.registerTool as any)(
     "proxenio_get_matches",
     {
       title: "Get Proxenio Matches",
@@ -173,7 +174,7 @@ Error Handling:
   - Returns auth error if API key is invalid or revoked
   - Returns rate limit error if ${RATE_LIMIT_PER_HOUR} requests/hour exceeded
   - Returns empty list if principal has no matches (profile may be incomplete)`,
-      inputSchema: GetMatchesShape,
+      inputSchema: GetMatchesShape as unknown as ZodTypeAny,
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
@@ -181,7 +182,7 @@ Error Handling:
         openWorldHint: true,
       },
     },
-    async (params) => {
+    async (params: { filter_type: string; filter_status: string; min_score: number }) => {
       try {
         const { data, rateLimit } = await getMatches();
 
@@ -203,7 +204,6 @@ Error Handling:
 
         return {
           content: [{ type: "text" as const, text: markdown }],
-          structuredContent: filteredResponse,
         };
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
@@ -216,7 +216,7 @@ Error Handling:
   );
 
   // ─── Tool 4: Accept Match ───
-  server.registerTool(
+  (server.registerTool as any)(
     "proxenio_accept_match",
     {
       title: "Accept Proxenio Introduction",
@@ -252,7 +252,7 @@ Error Handling:
   - 403: Principal is not authorized (e.g., they are the requester, not receiver)
   - 404: Match ID not found
   - 429: Rate limit exceeded`,
-      inputSchema: AcceptMatchShape,
+      inputSchema: AcceptMatchShape as unknown as ZodTypeAny,
       annotations: {
         readOnlyHint: false,
         destructiveHint: false,
@@ -260,14 +260,13 @@ Error Handling:
         openWorldHint: true,
       },
     },
-    async (params) => {
+    async (params: { match_id: string }) => {
       try {
         const { data, rateLimit } = await acceptMatch(params.match_id);
         const markdown = formatAcceptMarkdown(data, rateLimit);
 
         return {
           content: [{ type: "text" as const, text: markdown }],
-          structuredContent: data,
         };
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
