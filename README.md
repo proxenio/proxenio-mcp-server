@@ -55,7 +55,7 @@ Then in Claude Desktop, you can say:
 > "What is Proxenio?"  
 > → Claude uses `proxenio_discover` automatically
 
-> "Connect to Proxenio with this key: prx_abc123..."  
+> "Connect to Proxenio with this key: prx_YOUR_KEY_HERE_________________"  
 > → Claude uses `proxenio_set_api_key`
 
 > "Show me my professional matches"  
