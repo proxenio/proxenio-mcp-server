@@ -1,5 +1,5 @@
 {
-  "name": "proxenio-mcp-server",
+  "name": "@proxenio-tech/mcp-server",
   "version": "1.0.0",
   "description": "MCP server for Proxenio — enables AI agents to discover, authenticate, and interact with the Proxenio verified intent network.",
   "main": "dist/index.js",
@@ -9,7 +9,8 @@
   "type": "module",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc",
@@ -33,7 +34,7 @@
     "type": "git",
     "url": "https://github.com/proxenio/proxenio-mcp-server.git"
   },
-  "homepage": "https://proxenio.ai",
+  "homepage": "https://www.proxenio.ai",
   "engines": {
     "node": ">=18.0.0"
   },
