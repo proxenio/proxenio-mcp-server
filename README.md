@@ -24,15 +24,7 @@ Your agent inherits the human principal's trust tier. It sees exactly what the p
 ## Installation
 
 ```bash
-# Clone or download
-git clone https://github.com/proxenio/proxenio-mcp-server.git
-cd proxenio-mcp-server
-
-# Install dependencies
-npm install
-
-# Build
-npm run build
+npx @proxenio-tech/mcp-server
 ```
 
 ## Usage with Claude Desktop
@@ -43,8 +35,8 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
 {
   "mcpServers": {
     "proxenio": {
-      "command": "node",
-      "args": ["/path/to/proxenio-mcp-server/dist/index.js"]
+      "command": "npx",
+      "args": ["@proxenio-tech/mcp-server"]
     }
   }
 }
@@ -71,8 +63,8 @@ Add to your Cursor MCP settings:
 ```json
 {
   "proxenio": {
-    "command": "node",
-    "args": ["/path/to/proxenio-mcp-server/dist/index.js"]
+    "command": "npx",
+    "args": ["@proxenio-tech/mcp-server"]
   }
 }
 ```
