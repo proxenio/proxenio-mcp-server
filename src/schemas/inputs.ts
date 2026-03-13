@@ -56,3 +56,69 @@ export interface GetMatchesInput {
 export interface AcceptMatchInput {
   match_id: string;
 }
+
+export const GetDealsShape = {
+  filter_status: z
+    .enum(["all", "open", "closed"])
+    .default("all")
+    .describe("Filter deals by status: 'all', 'open', or 'closed'"),
+};
+
+export const RequestIntroShape = {
+  match_id: z
+    .string()
+    .uuid("match_id must be a valid UUID")
+    .describe(
+      "UUID of the match to request an introduction for. Get this from proxenio_get_matches."
+    ),
+  context: z
+    .string()
+    .max(500, "Context must be 500 characters or fewer")
+    .optional()
+    .describe(
+      "Optional message to the counterparty (max 500 characters)"
+    ),
+};
+
+export const LogOutcomeShape = {
+  deal_id: z
+    .string()
+    .uuid("deal_id must be a valid UUID")
+    .describe(
+      "UUID of the deal to log an outcome for. Get this from proxenio_get_deals."
+    ),
+  outcome_type: z
+    .enum([
+      "Intro",
+      "Pipeline Progress",
+      "Agreement or Deal",
+      "Results or Impact",
+      "Negative or Closing",
+      "Neutral or Respectful Close",
+    ])
+    .describe(
+      "Type of outcome: 'Intro', 'Pipeline Progress', 'Agreement or Deal', 'Results or Impact', 'Negative or Closing', or 'Neutral or Respectful Close'"
+    ),
+  outcome_description: z
+    .string()
+    .max(1000, "Outcome description must be 1000 characters or fewer")
+    .optional()
+    .describe(
+      "Optional description of the outcome (max 1000 characters)"
+    ),
+};
+
+export interface GetDealsInput {
+  filter_status: "all" | "open" | "closed";
+}
+
+export interface RequestIntroInput {
+  match_id: string;
+  context?: string;
+}
+
+export interface LogOutcomeInput {
+  deal_id: string;
+  outcome_type: string;
+  outcome_description?: string;
+}

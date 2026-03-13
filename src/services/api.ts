@@ -11,6 +11,9 @@ import {
 import type {
   MatchesResponse,
   AcceptResponse,
+  DealsResponse,
+  IntroRequestResponse,
+  OutcomeResponse,
   RateLimitHeaders,
 } from "../types.js";
 
@@ -163,4 +166,52 @@ export async function acceptMatch(matchId: string): Promise<{
   return makeRequest<AcceptResponse>("/matches/accept", "POST", {
     match_id: matchId,
   });
+}
+
+/**
+ * GET /api/agent/deals — Read the principal's deals.
+ */
+export async function getDeals(): Promise<{
+  data: DealsResponse;
+  rateLimit: RateLimitHeaders;
+}> {
+  return makeRequest<DealsResponse>("/deals");
+}
+
+/**
+ * POST /api/agent/intro-requests — Request an introduction (agent_pending).
+ */
+export async function requestIntro(
+  matchId: string,
+  context?: string
+): Promise<{
+  data: IntroRequestResponse;
+  rateLimit: RateLimitHeaders;
+}> {
+  const body: Record<string, unknown> = { match_id: matchId };
+  if (context !== undefined) {
+    body.context = context;
+  }
+  return makeRequest<IntroRequestResponse>("/intro-requests", "POST", body);
+}
+
+/**
+ * POST /api/agent/outcomes — Log an outcome (agent_pending).
+ */
+export async function logOutcome(
+  dealId: string,
+  outcomeType: string,
+  outcomeDescription?: string
+): Promise<{
+  data: OutcomeResponse;
+  rateLimit: RateLimitHeaders;
+}> {
+  const body: Record<string, unknown> = {
+    deal_id: dealId,
+    outcome_type: outcomeType,
+  };
+  if (outcomeDescription !== undefined) {
+    body.outcome_description = outcomeDescription;
+  }
+  return makeRequest<OutcomeResponse>("/outcomes", "POST", body);
 }
