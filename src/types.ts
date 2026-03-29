@@ -26,7 +26,7 @@ export interface Match {
   match_id: string;
   status: "pending" | "accepted";
   match_score: number;
-  match_type: "premium" | "strong" | "regular";
+  match_type: "top" | "high" | "standard";
   created_at: string;
   counterparty: Counterparty;
 }
