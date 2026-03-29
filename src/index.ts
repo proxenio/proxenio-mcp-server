@@ -21,7 +21,7 @@ import { registerTools } from "./tools/register.js";
 // Initialize the MCP server
 const server = new McpServer({
   name: "proxenio-mcp-server",
-  version: "1.0.1",
+  version: "1.0.2",
 });
 
 // Register all Proxenio tools
@@ -45,7 +45,7 @@ async function runHTTP(): Promise<void> {
 
   // Health check
   app.get("/health", (_req, res) => {
-    res.json({ status: "ok", server: "proxenio-mcp-server", version: "1.0.1" });
+    res.json({ status: "ok", server: "proxenio-mcp-server", version: "1.0.2" });
   });
 
   // MCP endpoint
