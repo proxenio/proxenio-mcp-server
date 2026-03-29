@@ -17,9 +17,9 @@ export const SetApiKeyShape = {
 
 export const GetMatchesShape = {
   filter_type: z
-    .enum(["all", "premium", "strong", "regular"])
+    .enum(["all", "top", "high", "standard"])
     .default("all")
-    .describe("Filter matches by type: 'all', 'premium', 'strong', or 'regular'"),
+    .describe("Filter matches by type: 'all', 'top', 'high', or 'standard'"),
   filter_status: z
     .enum(["all", "pending", "accepted"])
     .default("all")
@@ -48,7 +48,7 @@ export interface SetApiKeyInput {
 }
 
 export interface GetMatchesInput {
-  filter_type: "all" | "premium" | "strong" | "regular";
+  filter_type: "all" | "top" | "high" | "standard";
   filter_status: "all" | "pending" | "accepted";
   min_score: number;
 }

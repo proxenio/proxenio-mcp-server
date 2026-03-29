@@ -79,7 +79,7 @@ Examples:
         "## Scope Limitations",
         "- Agents CAN read matches and accept introductions",
         "- Agents CANNOT request intros, close deals, log outcomes, or modify settings",
-        "- Agents CANNOT bypass the matching engine's skip layers or tier gates",
+        "- Agents CANNOT bypass the matching engine's verification gates or tier gates",
         "",
         `**Status**: ${hasApiKey() ? "✓ API key configured" : "⚠ No API key set — use proxenio_set_api_key first"}`,
         "",
@@ -154,10 +154,10 @@ Returns matches sorted by match score (descending). Each match includes counterp
 
 Requires: API key must be set via proxenio_set_api_key first.
 
-The agent sees exactly what the human principal sees — same skip engine layers, same tier gates, same minimum score (40). Matches below 40 are never returned.
+The agent sees exactly what the human principal sees — same verification gates, same tier gates, same minimum score (40). Matches below 40 are never returned.
 
 Args:
-  - filter_type ('all' | 'premium' | 'strong' | 'regular'): Filter by match quality tier (default: 'all')
+  - filter_type ('all' | 'top' | 'high' | 'standard'): Filter by match quality tier (default: 'all')
   - filter_status ('all' | 'pending' | 'accepted'): Filter by match status (default: 'all')
   - min_score (number, 40-100): Minimum match score threshold (default: 40)
 
@@ -166,7 +166,7 @@ Returns:
 
 Examples:
   - Use when: "Show me my matches" or "What professional connections are available?"
-  - Use when: "Find my best matches" -> use filter_type='premium'
+  - Use when: "Find my best matches" -> use filter_type='top'
   - Use when: "Which introductions are pending?" -> use filter_status='pending'
   - Don't use when: API key has not been set yet (use proxenio_set_api_key first)
 
