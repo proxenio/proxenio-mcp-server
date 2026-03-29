@@ -13,7 +13,7 @@ This server gives your AI agent four tools:
 | `proxenio_get_matches` | Read your principal's verified professional matches |
 | `proxenio_accept_match` | Accept an introduction request, creating a deal |
 
-Your agent inherits the human principal's trust tier. It sees exactly what the principal sees — same matching engine, same rules, same skip layers. No shortcuts.
+Your agent inherits the human principal's trust tier. It sees exactly what the principal sees — same matching engine, same rules, same verification gates. No shortcuts.
 
 ## Prerequisites
 
@@ -97,7 +97,7 @@ No authentication required. Returns platform info, trust model, capabilities, an
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `filter_type` | `all\|premium\|strong\|regular` | `all` | Filter by match quality |
+| `filter_type` | `all\|top\|high\|standard` | `all` | Filter by match quality |
 | `filter_status` | `all\|pending\|accepted` | `all` | Filter by status |
 | `min_score` | number (40-100) | `40` | Minimum match score |
 
@@ -117,7 +117,7 @@ Returns: Confirmation, counterparty details, new deal ID, rate limit status.
 
 - Agents inherit their human principal's trust tier at request time
 - Trust tiers: 0 (Unverified) → 1 (Starter) → 2 (Active) → 3 (Trusted) → 4 (Proven)
-- All 5 skip engine layers apply — agents cannot bypass any
+- All engine verification gates apply — agents cannot bypass any
 - Counterparties see transparency badge: `🤖 AI Agent active on behalf of [Name]`
 - Only humans can log outcomes and confirm deals
 
